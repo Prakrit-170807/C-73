@@ -81,7 +81,7 @@ export default class Trans extends React.Component {
 
   }
 
-  existsbook = async () => {
+  existbook = async () => {
     const bookref = await database.collection("Books").where("BookID", "==", this.state.bookscnd).get();
     var transactype = ''
     if (bookref.docs.length == 0) {
@@ -134,12 +134,12 @@ export default class Trans extends React.Component {
         studenteligible = true
       }
       else {
-        tudenteligible = false
+        studenteligible = false
         this.setState({ bookscnd: '', studentsscnd: '' })
         Alert.alert(" Please check the student ID  ")
       }
     })
-    return Studenteligible
+    return studenteligible
   }
 
   BKissue = async () => {
@@ -150,13 +150,12 @@ export default class Trans extends React.Component {
       "transactionType": "Issue"
     })
     database.collection("Books").doc(this.state.bookscnd).update({
-      "AviBook": false,
-
+      'AviBook' : false
     })
     database.collection("Students").doc(this.state.studentscnd).update({
       "Issued": firebase.firestore.FieldValue.increment(+1)
     })
-    ToastAndroid.show('The book had been issued by the student', ToastAndroid.SHORT)
+    // ToastAndroid.show('The book had been issued by the student', ToastAndroid.SHORT)
   }
 
   BKreturn = async () => {
@@ -173,7 +172,7 @@ export default class Trans extends React.Component {
     database.collection("Students").doc(this.state.studentscnd).update({
       "Issued": firebase.firestore.FieldValue.increment(-1)
     })
-    ToastAndroid.show('The book had been returned by the student', ToastAndroid.SHORT)
+    // ToastAndroid.show('The book had been returned by the student', ToastAndroid.SHORT)
   }
 
   render() {
