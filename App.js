@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Button, Image } from 'react-native';
 import Constants from 'expo-constants';
-import { createAppContainer, createSwitchNavigator, } from 'react-navigation'; 
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'; 
 import {createBottomTabNavigator} from 'react-navigation-tabs'
 
 // You can import from local files
+import Login from "./components/Login"
 import Look from './components/search';
 import Trans from './components/transaction';
 
@@ -44,4 +45,9 @@ var switchContainer = createBottomTabNavigator({
 }
 )
 
-const Appcontainer = createAppContainer(switchContainer)
+var switchNavigation = createSwitchNavigator ({
+  Login : Login,
+  switchContainer: switchContainer
+})
+
+const Appcontainer = createAppContainer(switchNavigation)
